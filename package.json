@@ -11,6 +11,10 @@
     "request"
   ],
   "author": "jason lee",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IceFrozen/request-queen-bull.git"
+  },
   "license": "ISC",
   "dependencies": {
     "bull": "^2.0.0",
