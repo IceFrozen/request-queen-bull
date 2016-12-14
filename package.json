@@ -1,0 +1,23 @@
+{
+  "name": "request-queen-bull",
+  "version": "1.0.0",
+  "description": "a simple Http request queue base on bull",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./example/test.js"
+  },
+  "keywords": [
+    "bull",
+    "request"
+  ],
+  "author": "jason lee",
+  "license": "ISC",
+  "dependencies": {
+    "bull": "^2.0.0",
+    "lodash": "^4.17.2",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "express": "^4.14.0"
+  }
+}
