@@ -7,14 +7,14 @@
 - record the job which is failed or success  
 
 ## Uasge: 
-- git clone https://github.com/IceFrozen/request-queen-bull.git
+- git clone https://github.com/IceFrozen/request-queue-bull.git
 - npm install 
 - make sure the redis service is running and change the redisConn in ./expamle/config.js
 - npm test or node ./example/test.js
 
 ## Quick Start: 
 ```javascript
-    const QueenClass = require('request-queen-bull')
+    const QueenClass = require('request-queue-bull')
     const config = require('./config')      //send the config and options
     const qc = new QueenClass("test",config)  
     qc.pushRequest("id",{data:"test"})   // id is the job tag   you can get it use job.opts.jobTag

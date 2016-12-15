@@ -1,5 +1,5 @@
 {
-  "name": "request-queen-bull",
+  "name": "request-queue-bull",
   "version": "1.0.1",
   "description": "a simple Http request queue base on bull",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "keywords": [
     "bull",
-    "request"
+    "request",
+    "queue"
   ],
   "author": "jason lee",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IceFrozen/request-queen-bull.git"
+    "url": "git+https://github.com/IceFrozen/request-queue-bull.git"
   },
-  "readme": "README.md",
   "license": "ISC",
   "dependencies": {
     "bull": "^2.0.0",
