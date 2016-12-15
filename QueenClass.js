@@ -34,7 +34,7 @@ TaskQueen.prototype.init = function(){
   this.status = INITED
   let self = this
   this.queen.process(function(job, done){
-			console.log("invoke:"+job.jobId)
+			console.log("invoke:"+job.opts.jobTag)
 			self.emit('process',job)
 			if(job.opts.method === 'GET'){
 				return self._reqestGet(job.data,done)
@@ -101,13 +101,12 @@ TaskQueen.prototype._reqestPost =function(data,next){
 	if(this.status  !== INITED) {
 		throw new Error("has no init!!")
 	}
-	console.log("data",data)
 	 request.post(this.config.url,data,function(err,res){
 	 		if(err){
 	 			return next(new Error("retry"))
 	 		}	
 	 		let body = res.body
-	 		if(_.includes(body,'SUCCESS')){
+	 		if(_.includes(body,self.config.stopTag)){
 	 			next(null,res)
 	 		}else{
 	 			next(new Error('retry'))
@@ -146,14 +145,13 @@ TaskQueen.prototype.stop = function () {
 	return this
 } 
 TaskQueen.prototype.retry = function (job) {
-	console.log('retry',job.jobId)
+	console.log('retry',job.opts.jobTag)
 	let data = job.data
 	let opts = job.opts
 	let attemptsMade = job.attemptsMade -1
 	if(opts.retryNew){
 		attemptsMade=  opts.attemptsMade
 	}
-	console.log(attemptsMade)
 	if(this.setTimeoutMap[job.jobId]){
 		clearTimeout(this.setTimeoutMap[job.jobId])
 	}
@@ -173,7 +171,6 @@ TaskQueen.prototype.retry = function (job) {
 			job.remove()
 		}
 		delete opts.jobId
-		//console.log(opts.attemptsMade)
 		this.queen.add(data,opts)
 	}else{
 

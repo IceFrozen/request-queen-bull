@@ -17,16 +17,17 @@
     const QueenClass = require('request-queen-bull')
     const config = require('./config')      //send the config and options
     const qc = new QueenClass("test",config)  
-    qc.pushRequest("id",{data:"test"})   // id is the key in redis db0
-    .on("fail",(job,err)=>{  
+    qc.pushRequest("id",{data:"test"})   // id is the job tag   you can get it use job.jobTag 
+    .on("fail",(job,err)=>{ 
 	    console.log('fail')
     })
 .   on("success",(job, res)=>{
+		console.log("success:"+job.jobTag)   // print  id
 	    console.log("success")
 	    qc.stop()
     }).
     on('process',function (job) {    
-        console.log("job is done")
+        console.log("job is process!")
     })
     
 ```
@@ -36,7 +37,7 @@ example config.js
 module.exports = {
 	redisConn:"redis://localhost:6379/",
 	url:"http://localhost:8000/ping",
-	type:"type1",				// the type of config 
+	type:"type1",				// the type of config in types
 	stopTag:"SUCCESS",			//the success tag when the url return back in body
 	types:{
 	default:{  

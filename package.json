@@ -1,6 +1,6 @@
 {
   "name": "request-queen-bull",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a simple Http request queue base on bull",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/IceFrozen/request-queen-bull.git"
   },
+  "readme": "README.md",
   "license": "ISC",
   "dependencies": {
     "bull": "^2.0.0",
