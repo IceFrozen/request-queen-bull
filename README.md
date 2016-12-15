@@ -17,12 +17,12 @@
     const QueenClass = require('request-queen-bull')
     const config = require('./config')      //send the config and options
     const qc = new QueenClass("test",config)  
-    qc.pushRequest("id",{data:"test"})   // id is the job tag   you can get it use job.jobTag 
+    qc.pushRequest("id",{data:"test"})   // id is the job tag   you can get it use job.opts.jobTag
     .on("fail",(job,err)=>{ 
 	    console.log('fail')
     })
 .   on("success",(job, res)=>{
-		console.log("success:"+job.jobTag)   // print  id
+		console.log("success:"+job.opts.jobTag)   // print  id
 	    console.log("success")
 	    qc.stop()
     }).

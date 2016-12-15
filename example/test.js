@@ -16,8 +16,10 @@ app.listen(8000)
 qc.pushRequest("id",{data:"test"})
 .on("fail",(job,err)=>{
 	console.log('fail')
+	qc.stop()
 })
 .on("success",(job, res)=>{
+	console.log(job.opts.jobTag)
 	console.log("success")
 	qc.stop()
 }).on('process',function (job) {

@@ -76,8 +76,6 @@ TaskQueen.prototype._emit = function(name,job,...needles){
 	this.emit(name,job,needles)
 }
 
-
-
 TaskQueen.prototype._reqestGet =function(data,next){
 	if(this.status  !== INITED) {
 		throw new Error("has no init!!")
@@ -121,15 +119,14 @@ TaskQueen.prototype.pushRequest = function(jobTag,data){
 		let opts = this.getTypes()
 		opts.jobTag = jobTag
 		opts.attemptsMade = 0
-		opts.delay = 1000;  //第一次发送 立即发送
-		opts._data = data;  //第一次发送 立即发送
+		opts.delay = 1000;  //firstime  
+		opts._data = data; 
 		if(opts.jobId) {
 			throw new Error("error! the jobId can't be exist")
 		}
 		this.queen.add(data,opts)
 		return this
 }
-
 
 TaskQueen.prototype.onEvent = function (key,fun) {
 	this.queen.on(key,fun)
@@ -139,11 +136,9 @@ TaskQueen.prototype.stop = function(){
   	for(let key in this.setTimeoutMap){
   		clearTimeout(this.setTimeoutMap[key])
   	}
+  	this.queen.close()
+  	return this
 }
-TaskQueen.prototype.stop = function () {
-	this.queen.close()
-	return this
-} 
 TaskQueen.prototype.retry = function (job) {
 	console.log('retry',job.opts.jobTag)
 	let data = job.data
@@ -177,6 +172,4 @@ TaskQueen.prototype.retry = function (job) {
 		this.setTimeoutMap[job.jobId] = setTimeout(function(){job.retry()},opts.delay)
 	}
 }
-
-
 module.exports = TaskQueen
